@@ -1,0 +1,26 @@
+@ECHO OFF
+
+SET BASENAME1=population
+SET BASENAME2=poptesting
+SET BASENAME3=popselected
+
+SET CMD1=algebragen_v2.py
+SET CMD2=populationtester.py
+SET CMD3=popselection.py
+
+
+SETLOCAL ENABLEDELAYEDEXPANSION
+SET "P=>"
+
+FOR /L %%x IN (1,1,100) DO (
+	SET "NUM=0000%%x"
+	ECHO %CMD1% 1000 !P! %BASENAME1%!NUM:~-4!
+	ECHO %CMD2% 2 %BASENAME1%!NUM:~-4! !P!  %BASENAME2%!NUM:~-4!
+	ECHO %CMD3% 1 %BASENAME2%!NUM:~-4! !P!  %BASENAME3%!NUM:~-4!.txt
+
+	ECHO del %BASENAME1%!NUM:~-4!
+	ECHO del %BASENAME2%!NUM:~-4!
+	
+)
+
+ENDLOCAL
